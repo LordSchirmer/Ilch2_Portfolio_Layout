@@ -1,6 +1,6 @@
 # Portfolio-Layout for Ilch 2
 
-_This is a portfolio layout for CMS Ilch 2._
+_This is a portfolio layout for CMS Ilch >2.2.X_
 
 ### Installation
 - den Ordner "application" in das Hauptverzeichnis des CMS ilch 2 kopieren
