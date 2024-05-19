@@ -12,25 +12,20 @@ class Config extends \Ilch\Config\Install
         'link' => 'https://www.ilch.de',
         'desc' => 'Portfolio Layout',
         'settings' => [
-            'siteName' => [
-                'type' => 'text',
-                'default' => 'Max Mustermann',
-                'description' => 'descSiteName',
-            ],
             'siteTitle' => [
                 'type' => 'text',
                 'default' => 'Musterman´s Portfolio',
                 'description' => 'descSiteTitle',
             ],
+            'siteName' => [
+                'type' => 'text',
+                'default' => 'Max Mustermann',
+                'description' => 'descSiteName',
+            ],
             'siteLogo' => [
                 'type' => 'mediaselection',
                 'default' => 'application/layouts/portfolio/assets/img/profile-img.jpg',
                 'description' => 'descSiteLogo',
-            ],
-            'siteBackground' => [
-                'type' => 'mediaselection',
-                'default' => 'application/layouts/portfolio/assets/img/profile-background.jpg',
-                'description' => 'descSiteBackground',
             ],
             'siteColors' => [
                 'type' => 'separator',
@@ -44,6 +39,19 @@ class Config extends \Ilch\Config\Install
                 'type' => 'colorpicker',
                 'default' => '#149ddd',
                 'description' => 'descSiteAccentColor',
+            ],
+            'siteBackground' => [
+                'type' => 'separator',
+            ],
+            'siteBackgroundImage' => [
+                'type' => 'mediaselection',
+                'default' => 'application/layouts/portfolio/assets/img/profile-background.jpg',
+                'description' => 'descSiteBackgroundImage',
+            ],
+            'siteBackgroundCover' => [
+                'type' => 'text',
+                'default' => '90',
+                'description' => 'descSiteBackgroundCover',
             ],
             'siteSocials' => [
                 'type' => 'separator',

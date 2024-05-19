@@ -23,6 +23,7 @@ function adjustBrightness($hex, $brightness) {
     }
     return '#' . implode($hex);
 }
+
 /**
  * Converts hex to rgba
  *
@@ -37,43 +38,48 @@ function hexToRGBA($hex, $opacity) {
 }
 
 /**
- * Check Background
+ * Check Background Image
  */
 if ($this->getLayoutSetting('siteBackground') != '' && file_exists($this->getBaseUrl($this->getLayoutSetting('siteBackground')))) {
-    $background = $this->getBaseUrl($this->getLayoutSetting('siteBackground'));
+    $backgroundImage = $this->getBaseUrl($this->getLayoutSetting('siteBackground'));
 } else {
-    $background = $this->getLayoutUrl('assets/img/profile-background.jpg');
+    $backgroundImage = $this->getLayoutUrl('assets/img/profile-background.jpg');
 }
 
 /**
- * Check Brightness
+ * Check Background Cover
  */
-if ($this->getLayoutSetting('siteBrightness') == 1) {
-    $brightness = '    .portfolio-details { background: linear-gradient(rgba(var(--bs-body-bg-rgb), 0.8), rgba(var(--bs-body-bg-rgb), 0.8)), url(' . $background . ') no-repeat fixed; background-size: cover; }';
+$n = "\n" . '    ';
+if (is_numeric($this->getLayoutSetting('siteBackgroundCover'))) {
+    if ($this->getLayoutSetting('siteBackgroundCover') <= 0) {
+        $alpha = 0;
+    } elseif ($this->getLayoutSetting('siteBackgroundCover') >= 100) {
+        $alpha = 1;
+    } else {
+        $alpha = $this->getLayoutSetting('siteBackgroundCover') / 100;
+    }
+    $backgroundAlpha = '.portfolio-details { background: linear-gradient(rgba(var(--bs-body-bg-rgb), ' . $alpha . '), rgba(var(--bs-body-bg-rgb), ' . $alpha . ')), url(' . $backgroundImage . ') no-repeat fixed; background-size: cover; }' . $n;
 } else {
-    $brightness = '    .portfolio-details { background: linear-gradient(rgba(var(--bs-body-bg-rgb), 0.9), rgba(var(--bs-body-bg-rgb), 0.9)), url(' . $background . ') no-repeat fixed; background-size: cover; }';
+    $backgroundAlpha = '';
 }
 
 /**
  * Output styles
  **/
-$style = '<style>' . "\n" . $brightness . "\n" .
-         '    a, .ilch-link { color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ) . '; }' . "\n" .
-         '    a:hover { color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.25 ) . '; }' . "\n" .
-         '    .back-to-top { background: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ) . '; }' . "\n" .
-         '    .back-to-top:hover { background: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.5 ) . '; }' . "\n" .
-         '    .mobile-nav-toggle { background: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ) . '; }' . "\n" .
-         '    .mobile-nav-toggle:hover { background: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.5 ) . '; }' . "\n" .
-         '    #header .site-profile img.profile-image { border: 8px solid ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.5 ) . '; }' . "\n" .
-         '    #header .site-profile .social-links a:hover { background: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ) . '; }' . "\n" .
-         '    .nav-menu ul li ul li a:hover::before { color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0.25 ) . '; }' . "\n" .
-         '    .nav-menu ul li ul li a:hover { color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0.25 ) . '; }' . "\n" .
-         '    #portfolio-footer a:hover { color:  ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0.25 ) . '; }' . "\n" .
-         '    .ilch-head { background: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ) . '; background: linear-gradient(180deg, ' . hexToRGBA(adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.3 ), 1 ) . ' 0%, ' . hexToRGBA(adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ), 1 ) . ' 100%); }' . "\n" .
-         '    #forum .btn.btn-primary { background-color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.2 ) . '; }' . "\n" .
-         '    #forum .btn.btn-sm.btn-primary { background-color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.2 ) . '; }' . "\n" .
-         '    #forum .btn.btn-primary:hover { background-color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.5 ) . '; }' . "\n" .
-         '    #forum .btn.btn-sm.btn-primary:hover { background-color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.5 ) . '; }' . "\n" .         
-         '</style>' . "\n";
-
+$style = '<!-- advanced css settings -->' . $n . 
+         '<style>' . $n .
+         'a, .ilch-link { color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ) . '; }' . $n .
+         'a:hover { color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.25 ) . '; }' . $n .
+         '.back-to-top, .mobile-nav-toggle { background: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ) . '; }' . $n .
+         '.back-to-top:hover, .mobile-nav-toggle:hover { background: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.5 ) . '; }' . $n .
+         '#header .site-profile img.profile-image { border: 8px solid ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ) . '; }' . $n .
+         '#header .site-profile .social-links a:hover { background: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ) . '; }' . $n .
+         '.nav-menu ul li ul li a:hover, .nav-menu ul li ul li a:hover::before { color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0.25 ) . '; }' . $n .
+         $backgroundAlpha .
+         '.portfolio-details .portfolio-info { box-shadow: ' . hexToRGBA(adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ), 0.5 ) . ' 1px 1px 2px; }' . $n .
+         '#portfolio-footer a:hover { color:  ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0.25 ) . '; }' . $n .
+         '.ilch-head { background: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ) . '; background: linear-gradient(180deg, ' . hexToRGBA(adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.3 ), 1 ) . ' 0%, ' . hexToRGBA(adjustBrightness($this->getLayoutSetting('siteAccentColor'), 0 ), 1 ) . ' 100%); }' . $n .
+         '#forum .btn.btn-primary, #forum .btn.btn-sm.btn-primary { background-color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.2 ) . '; }' . $n .
+         '#forum .btn.btn-primary:hover, #forum .btn.btn-sm.btn-primary:hover { background-color: ' . adjustBrightness($this->getLayoutSetting('siteAccentColor'), -0.5 ) . '; }' . $n .         
+         '</style><!-- end advanced css settings -->' . "\r\n";
 echo $style;

@@ -1,7 +1,15 @@
 /*--- general ---*/
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-stretch: 100%;
+    src: url('../font/open_sans.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 body {
     font-family: "Open Sans", sans-serif;
     color: var(--bs-body-color);
+    background: var(--bs-body-bg);
 }
 a {
     color: var(--bs-body-color);
@@ -10,14 +18,6 @@ a {
 a:hover {
     color: var(--bs-tertiary-color);
     text-decoration: none;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: "Raleway", sans-serif;
 }
 
 /*--- back to top button ---*/
@@ -32,7 +32,7 @@ h6 {
     width: 40px;
     height: 40px;
     border-radius: 50px;
-    transition: all 0.4s;
+    transition: all 0.5s;
 }
 
 .back-to-top i {
@@ -60,11 +60,10 @@ h6 {
     width: 300px;
     transition: all ease-in-out 0.5s;
     z-index: 9997;
-    transition: all 0.5s;
     padding: 0 15px;
     overflow-y: auto;
     background: var(--bs-dark);
-    background-image: linear-gradient( 0deg, var(--bs-dark) 10%, var(--bs-gray-800) 100%);
+    background-image: linear-gradient(0deg, var(--bs-dark) 10%, var(--bs-gray-800) 100%);
 }
 
 /*--- scrollbar main menu ---*/
@@ -93,7 +92,8 @@ h6 {
     width: 120px;
     height: 120px;
     border: 8px solid var(--bs-gray-800);
-    transition: 0.3s;
+    transition: 0.5s;
+    box-shadow: 0 1px 2px var(--bs-black);
 }
 
 #header .site-profile img.profile-image:hover {
@@ -108,8 +108,7 @@ h6 {
     font-size: 24px;
     margin: 0;
     padding: 0;
-    font-weight: 600;
-    font-family: "Poppins", sans-serif;
+    font-weight: 500;
 }
 
 #header .site-profile h1 a,
@@ -118,13 +117,13 @@ h6 {
     text-decoration: none;
     align-items: center;
     justify-content: center;
-    text-shadow: 0 1px 1px var(--bs-black);
+    text-shadow: 0 1px 2px var(--bs-black);
 }
 
 #header .site-profile .social-links a {
     font-size: 18px;
     display: inline-block;
-    background: var(--bs-gray-700);
+    background: var(--bs-gray-800);
     color: var(--bs-white);
     line-height: 1;
     padding: 8px 0;
@@ -133,7 +132,8 @@ h6 {
     text-align: center;
     width: 36px;
     height: 36px;
-    transition: 0.3s;
+    transition: 0.5s;
+    box-shadow: 0 1px 1px var(--bs-black);
 }
 
 #header .site-profile .social-links a:hover {
@@ -156,11 +156,9 @@ h6 {
     #header {
         left: -300px;
     }
-
     #main {
         margin-left: 0;
     }
-
     .container,
     .container-fluid {
         padding-left: 12px;
@@ -177,26 +175,37 @@ h6 {
     margin: 0;
     padding: 0;
     list-style: none;
+    transition: all 0.5s;
 }
 
-.nav-menu ul li {
+.nav-menu ul li ul li {
     display: block;
+    width: 250px;
+    line-height: 2rem;
+    vertical-align: middle;
 }
 
-.nav-menu>ul>li {
+.nav-menu ul li ul li {
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(to right, var(--bs-gray-800), transparent);
+    border-image-slice: 1;
+}
+
+.nav-menu ul li ul li:last-child {
+    border: none;
+    margin-bottom: 2rem;
+}
+
+.nav-menu > ul > li {
     position: relative;
     white-space: nowrap;
 }
 
 .nav-menu ul li ul li a::before {
     content: "\2022";
+    font-weight: 500;
     margin-right: 10px;
     color: var(--bs-gray-400);
-}
-.nav-menu ul li ul li a:hover::before {
-    content: "\00BB";
-    margin-right: 10px;
-    color: var(--bs-white);
 }
 
 .nav-menu a,
@@ -205,9 +214,14 @@ h6 {
     align-items: center;
     color: var(--bs-gray-400);
     padding: 5px 15px;
-    margin-bottom: 8px;
-    transition: 0.3s;
     font-size: 15px;
+    font-weight: 100;
+}
+
+.nav-menu ul li a:first-child:not(ul li ul li a) {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--bs-gray-600);
 }
 
 .nav-menu a:hover,
@@ -219,6 +233,11 @@ h6 {
     text-shadow: 0 1px 1px var(--bs-black);
 }
 
+.nav-menu ul li ul li a:hover {
+    background: transparent;
+    background: linear-gradient(90deg, rgba(0,0,0,0.1) 0%, transparent 100%);
+}
+
 /*--- mobile navigation menu ---*/
 .mobile-nav-toggle {
     position: fixed;
@@ -227,7 +246,7 @@ h6 {
     z-index: 9998;
     border: 0;
     font-size: 24px;
-    transition: all 0.4s;
+    transition: all 0.5s;
     outline: none !important;
     background: var(--bs-black);
     color: var(--bs-white);
@@ -261,7 +280,7 @@ section {
 
 .section-title h2 {
     font-size: 32px;
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 20px;
     padding-bottom: 20px;
     position: relative;
@@ -283,18 +302,18 @@ section {
 
 .portfolio-details .portfolio-info {
     padding: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border-radius: 5px;
     background: var(--bs-body-bg);
-    background-image: linear-gradient( 135deg, var(--bs-secondary-bg) 10%, var(--bs-body-bg) 100%);
+    background-image: linear-gradient(135deg, var(--bs-secondary-bg) 10%, var(--bs-body-bg) 100%);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
 }
 
 .portfolio-details .portfolio-info h3 {
     font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--bs-border-color);
 }
 
@@ -302,14 +321,14 @@ section {
 .breadcrumbs {
     padding: 15px 0;
     background: var(--bs-body-bg);
-    background-image: linear-gradient( 135deg, var(--bs-secondary-bg) 10%, var(--bs-body-bg) 100%);
+    background-image: linear-gradient(135deg, var(--bs-secondary-bg) 10%, var(--bs-body-bg) 100%);
     border-bottom: 1px solid var(--bs-border-color);
-    text-shadow: rgba(0, 0, 0, 0.5) 0 1px 1px;
 }
 
 .breadcrumbs h2 {
     font-size: 30px;
     font-weight: 300;
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 0px -4px 10px rgba(255,255,255,0.3);
 }
 
 .breadcrumbs ol {
@@ -330,11 +349,9 @@ section {
     .breadcrumbs .d-flex {
         display: block !important;
     }
-
     .breadcrumbs ol {
         display: block;
     }
-
     .breadcrumbs ol li {
         display: inline-block;
     }
@@ -351,15 +368,15 @@ section {
 }
 
 #forum img[src*="icon_post_target.png"] {
-    content: url("../img/forum/icon_post_target.png");
+    content: url('../img/forum/icon_post_target.png');
 }
 
 #forum img[src*="topic_read.png"] {
-    content: url("../img/forum/topic_read.png");
+    content: url('../img/forum/topic_read.png');
 }
 
 #forum dl.icon.topic-read {
-    background-image: url("../img/forum/topic_read.png") !important;
+    background-image: url('../img/forum/topic_read.png') !important;
 }
 
 #forum .btn.btn-primary,
@@ -378,7 +395,7 @@ section {
     background-color: var(--bs-body-bg);
 }
 
-/*--- cards ---*/
+/*--- bs5 cards ---*/
 .card {
     margin-bottom: 1rem;
 }
