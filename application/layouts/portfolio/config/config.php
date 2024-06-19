@@ -6,7 +6,7 @@ class Config extends \Ilch\Config\Install
 {
     public $config = [
         'name' => 'Ilch-Portfolio',
-        'version' => '1.0.0',
+        'version' => '1.0.1',
         'ilchCore' => '2.2.0',
         'author' => 'Lord|Schirmer',
         'link' => 'https://www.ilch.de',

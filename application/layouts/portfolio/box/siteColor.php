@@ -40,7 +40,7 @@ function hexToRGBA($hex, $opacity) {
 /**
  * Check Background Image
  */
-if ($this->getLayoutSetting('siteBackground') != '' && file_exists($this->getBaseUrl($this->getLayoutSetting('siteBackground')))) {
+if ($this->getLayoutSetting('siteBackground') != '' && file_exists($this->getBaseUrl($this->getLayoutSetting('siteBackgroundImage')))) {
     $backgroundImage = $this->getBaseUrl($this->getLayoutSetting('siteBackground'));
 } else {
     $backgroundImage = $this->getLayoutUrl('assets/img/profile-background.jpg');
